@@ -12,8 +12,7 @@ const Header = () => {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-around",
-      }}
-    >
+      }}>
       <Pressable
         style={{
           flexDirection: "row",
@@ -22,8 +21,7 @@ const Header = () => {
           borderWidth: 1,
           borderRadius: 25,
           padding: 8,
-        }}
-      >
+        }}>
         <Ionicons name="bed-sharp" size={28} color="white" />
         <Text
           style={{
@@ -31,8 +29,7 @@ const Header = () => {
             fontWeight: "bold",
             color: "white",
             fontSize: 15,
-          }}
-        >
+          }}>
           Stays
         </Text>
       </Pressable>
@@ -42,8 +39,7 @@ const Header = () => {
           flexDirection: "row",
           alignItems: "center",
           padding: 8,
-        }}
-      >
+        }}>
         <FontAwesome5 name="plane" size={23} color="white" />
         <Text
           style={{
@@ -51,8 +47,7 @@ const Header = () => {
             fontWeight: "bold",
             color: "white",
             fontSize: 15,
-          }}
-        >
+          }}>
           Flights
         </Text>
       </Pressable>
@@ -62,8 +57,7 @@ const Header = () => {
           flexDirection: "row",
           alignItems: "center",
           padding: 8,
-        }}
-      >
+        }}>
         <FontAwesome5 name="taxi" size={24} color="white" />
         <Text
           style={{
@@ -71,8 +65,7 @@ const Header = () => {
             fontWeight: "bold",
             color: "white",
             fontSize: 15,
-          }}
-        >
+          }}>
           Car Rental
         </Text>
       </Pressable>
@@ -82,8 +75,7 @@ const Header = () => {
           flexDirection: "row",
           alignItems: "center",
           padding: 8,
-        }}
-      >
+        }}>
         <FontAwesome5 name="uber" size={24} color="white" />
         <Text
           style={{
@@ -91,8 +83,7 @@ const Header = () => {
             fontWeight: "bold",
             color: "white",
             fontSize: 15,
-          }}
-        >
+          }}>
           Taxi
         </Text>
       </Pressable>
