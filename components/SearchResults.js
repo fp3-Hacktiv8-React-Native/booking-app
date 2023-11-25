@@ -47,7 +47,7 @@ const SearchResults = ({ data, input, setInput }) => {
                     {item.shortDescription}
                   </Text>
                   <Text style={{ color: "gray", fontSize: 15 }}>
-                    {item.properties.length}
+                    {item.properties.length} properties
                   </Text>
                 </View>
               </Pressable>
