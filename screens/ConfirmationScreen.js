@@ -28,7 +28,7 @@ const ConfirmationScreen = () => {
   const dispatch = useDispatch();
   const confirmBooking = () => {
     dispatch(savedPlaces(route.params));
-    navigation.replace(navigation.navigate("Home"));
+    navigation.replace("Main");
   };
   return (
     <View>
