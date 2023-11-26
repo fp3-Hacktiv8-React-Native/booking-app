@@ -5,7 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { savedPlaces } from "../SavedReducer";
 import { doc, setDoc } from "firebase/firestore";
-import { db, uid } from "../firebase";
+import { db, uid, auth } from "../firebase";
 
 const ConfirmationScreen = () => {
   const route = useRoute();
@@ -28,18 +28,19 @@ const ConfirmationScreen = () => {
     });
   }, []);
   const dispatch = useDispatch();
+  const uid = auth.currentUser.uid;
   const confirmBooking = async () => {
     dispatch(savedPlaces(route.params));
 
     await setDoc(
       doc(db, "users", `${uid}`),
       {
-        bookingDetails: {...route.params},
+        bookingDetails: { ...route.params },
       },
       {
-        merge:true
+        merge: true,
       }
-    )
+    );
     navigation.replace("Main");
   };
   return (
