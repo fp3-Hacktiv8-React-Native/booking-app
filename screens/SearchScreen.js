@@ -468,23 +468,22 @@ const SearchScreen = () => {
     },
   ];
 
-  const [items,setItems] = useState([]);
+  const [items, setItems] = useState([]);
 
-  useEffect(()=> {
-if(items.length > 0) return;
+  useEffect(() => {
+    if (items.length > 0) return;
 
-const fetchProducts = async () => {
-  const colRef = collection(db,"places");
-  
-  const docSnap = await getDocs(colRef);
-  docSnap.forEach((doc) => {
-    items.push(doc.data());
-  });
- 
-} 
-fetchProducts();
-  },[items])
-  console.log(items)
+    const fetchProducts = async () => {
+      const colRef = collection(db, "places");
+
+      const docSnap = await getDocs(colRef);
+      docSnap.forEach((doc) => {
+        items.push(doc.data());
+      });
+    };
+    fetchProducts();
+  }, [items]);
+  // console.log(items)
 
   return (
     <SafeAreaView>

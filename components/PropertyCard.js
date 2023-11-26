@@ -1,15 +1,18 @@
+import React, { useState, useEffect } from "react";
 import {
   Dimensions,
   Image,
   Pressable,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { removeList, savedList } from "../SavedReducer";
 
 const PropertyCard = ({
   rooms,
@@ -21,6 +24,25 @@ const PropertyCard = ({
 }) => {
   const { width, height } = Dimensions.get("window");
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [isSaved, setIsSaved] = useState(false);
+  const savedProperties = useSelector((state) => state.booking.list);
+
+  useEffect(() => {
+    setIsSaved(
+      savedProperties.some((savedProperty) => savedProperty.id === property.id)
+    );
+  }, [property.id, savedProperties]);
+
+  const handleToggleSaveProperty = () => {
+    if (isSaved) {
+      dispatch(removeList(property));
+    } else {
+      dispatch(savedList(property));
+    }
+    setIsSaved(!isSaved);
+  };
+
   return (
     <View>
       <Pressable
@@ -38,7 +60,8 @@ const PropertyCard = ({
             selectedDates: selectedDates,
           })
         }
-        style={{ margin: 15, flexDirection: "row", backgroundColor: "white" }}>
+        style={{ margin: 15, flexDirection: "row", backgroundColor: "white" }}
+      >
         <View>
           <Image
             style={{ height: height / 4, width: width - 280 }}
@@ -52,17 +75,26 @@ const PropertyCard = ({
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-            }}>
+            }}
+          >
             <Text style={{ width: 200 }}>{property.name}</Text>
-            <AntDesign name="hearto" size={24} color="red" />
+            <TouchableOpacity onPress={handleToggleSaveProperty}>
+              <AntDesign
+                name={isSaved ? "heart" : "hearto"}
+                size={24}
+                color={isSaved ? "red" : "black"}
+              />
+            </TouchableOpacity>
           </View>
+
           <View
             style={{
               flexDirection: "row",
               alignItems: "center",
               gap: 6,
               marginTop: 7,
-            }}>
+            }}
+          >
             <MaterialIcons name="stars" size={24} color="green" />
             <Text>{property.rating}</Text>
             <View
@@ -71,9 +103,11 @@ const PropertyCard = ({
                 paddingVertical: 3,
                 borderRadius: 5,
                 width: 100,
-              }}>
+              }}
+            >
               <Text
-                style={{ textAlign: "center", color: "white", fontSize: 15 }}>
+                style={{ textAlign: "center", color: "white", fontSize: 15 }}
+              >
                 Genius Level
               </Text>
             </View>
@@ -85,7 +119,8 @@ const PropertyCard = ({
               marginTop: 6,
               color: "gray",
               fontWeight: "bold",
-            }}>
+            }}
+          >
             {property.address.length > 50
               ? property.address.substr(0, 50)
               : property.address}
@@ -100,13 +135,15 @@ const PropertyCard = ({
               flexDirection: "row",
               alignItems: "center",
               gap: 8,
-            }}>
+            }}
+          >
             <Text
               style={{
                 color: "red",
                 fontSize: 18,
                 textDecorationLine: "line-through",
-              }}>
+              }}
+            >
               {property.oldPrice * adults}
             </Text>
             <Text style={{ fontSize: 18 }}>
@@ -129,7 +166,8 @@ const PropertyCard = ({
               borderRadius: 5,
               width: 150,
               paddingHorizontal: 3,
-            }}>
+            }}
+          >
             <Text style={{ textAlign: "center", color: "white" }}>
               Limited Time deal
             </Text>

@@ -6,7 +6,7 @@ import MapView, { Marker } from "react-native-maps";
 const MapScreen = () => {
   const route = useRoute();
   const mapView = useRef(null);
-  console.log(route.params);
+  // console.log(route.params);
   const coordinates = [];
   const details = route.params.searchResults.map((item) =>
     item.properties?.map((prop) => {
@@ -36,21 +36,24 @@ const MapScreen = () => {
               coordinate={{
                 latitude: Number(property.latitude),
                 longitude: Number(property.longitude),
-              }}>
+              }}
+            >
               <Pressable
                 style={{
                   backgroundColor: "#003580",
                   paddingHorizontal: 7,
                   paddingVertical: 4,
                   borderRadius: 4,
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     fontSize: 15,
                     color: "white",
                     textAlign: "center",
                     fontWeight: "bold",
-                  }}>
+                  }}
+                >
                   {property.newPrice}
                 </Text>
               </Pressable>
