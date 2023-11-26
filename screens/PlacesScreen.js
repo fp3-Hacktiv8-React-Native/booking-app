@@ -12,6 +12,8 @@ import { ModalTitle } from "react-native-modals";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { ModalContent } from "react-native-modals";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 const PlacesScreen = () => {
   const route = useRoute();
@@ -529,7 +531,26 @@ const PlacesScreen = () => {
   const searchPlaces = data?.filter(
     (item) => item.place === route.params.place
   );
-  const [sortedData, setSortedData] = useState(data);
+  const [loading, setLoading] = useState(false);
+  const [items,setItems] = useState([]);
+  useEffect(()=> {
+    if(items.length > 0) return;
+    
+    setLoading(true);
+
+    const fetchProducts = async () => {
+      const colRef = collection(db,"places");
+      
+      const docSnap = await getDocs(colRef);
+      docSnap.forEach((doc) => {
+        items.push(doc.data());
+      });
+     setLoading(false);
+    } 
+    fetchProducts();
+      },[items])
+      console.log(items)
+  const [sortedData, setSortedData] = useState(items);
   console.log(searchPlaces);
 
   const compare = (a, b) => {
@@ -567,6 +588,7 @@ const PlacesScreen = () => {
   };
 
   console.log(route.params);
+  
   return (
     <View>
       <Pressable
@@ -608,6 +630,9 @@ const PlacesScreen = () => {
         </Pressable>
       </Pressable>
 
+      {loading ? (
+      <Text>Fetching places...</Text>
+      ) : (
       <ScrollView style={{ backgroundColor: "#F5F5F5" }}>
         {sortedData
           ?.filter((item) => item.place === route.params.place)
@@ -625,6 +650,9 @@ const PlacesScreen = () => {
             ))
           )}
       </ScrollView>
+      )}
+
+      
       <BottomModal
         onBackdropPress={() => setModalVisibile(!modalVisibile)}
         swipeDirection={["up", "down"]}

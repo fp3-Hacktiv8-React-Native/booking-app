@@ -4,6 +4,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { savedPlaces } from "../SavedReducer";
+import { doc, setDoc } from "firebase/firestore";
+import { db, uid } from "../firebase";
 
 const ConfirmationScreen = () => {
   const route = useRoute();
@@ -26,8 +28,18 @@ const ConfirmationScreen = () => {
     });
   }, []);
   const dispatch = useDispatch();
-  const confirmBooking = () => {
+  const confirmBooking = async () => {
     dispatch(savedPlaces(route.params));
+
+    await setDoc(
+      doc(db, "users", `${uid}`),
+      {
+        bookingDetails: { ...route.params },
+      },
+      {
+        merge: true,
+      }
+    );
     navigation.replace("Main");
   };
   return (
@@ -40,7 +52,8 @@ const ConfirmationScreen = () => {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-          }}>
+          }}
+        >
           <View>
             <Text style={{ fontSize: 25, fontWeight: "bold" }}>
               {route.params.name}
@@ -51,7 +64,8 @@ const ConfirmationScreen = () => {
                 alignItems: "center",
                 gap: 6,
                 marginTop: 7,
-              }}>
+              }}
+            >
               <MaterialIcons name="stars" size={24} color="green" />
               <Text>{route.params.rating}</Text>
               <View
@@ -60,13 +74,15 @@ const ConfirmationScreen = () => {
                   paddingVertical: 3,
                   borderRadius: 5,
                   width: 100,
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     color: "white",
                     fontSize: 15,
-                  }}>
+                  }}
+                >
                   Genius Level
                 </Text>
               </View>
@@ -79,7 +95,8 @@ const ConfirmationScreen = () => {
               paddingHorizontal: 6,
               paddingVertical: 4,
               borderRadius: 6,
-            }}>
+            }}
+          >
             <Text style={{ color: "white", fontSize: 13 }}>
               Travel sustainable
             </Text>
@@ -91,13 +108,15 @@ const ConfirmationScreen = () => {
             flexDirection: "row",
             alignItems: "center",
             gap: 60,
-          }}>
+          }}
+        >
           <View>
             <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 3 }}>
               Check In
             </Text>
             <Text
-              style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}>
+              style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}
+            >
               {route.params.startDate}
             </Text>
           </View>
@@ -107,7 +126,8 @@ const ConfirmationScreen = () => {
               Check Out
             </Text>
             <Text
-              style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}>
+              style={{ fontSize: 16, fontWeight: "bold", color: "#007FFF" }}
+            >
               {route.params.endDate}
             </Text>
           </View>
@@ -131,14 +151,16 @@ const ConfirmationScreen = () => {
             marginHorizontal: 12,
             marginBottom: 20,
             borderRadius: 4,
-          }}>
+          }}
+        >
           <Text
             style={{
               textAlign: "center",
               color: "white",
               fontSize: 15,
               fontWeight: "bold",
-            }}>
+            }}
+          >
             Book Now
           </Text>
         </Pressable>
