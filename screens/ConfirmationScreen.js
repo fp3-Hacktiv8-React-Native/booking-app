@@ -4,6 +4,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { savedPlaces } from "../SavedReducer";
+import { doc, setDoc } from "firebase/firestore";
+import { db, uid } from "../firebase";
 
 const ConfirmationScreen = () => {
   const route = useRoute();
@@ -26,8 +28,18 @@ const ConfirmationScreen = () => {
     });
   }, []);
   const dispatch = useDispatch();
-  const confirmBooking = () => {
+  const confirmBooking = async () => {
     dispatch(savedPlaces(route.params));
+
+    await setDoc(
+      doc(db, "users", `${uid}`),
+      {
+        bookingDetails: {...route.params},
+      },
+      {
+        merge:true
+      }
+    )
     navigation.replace("Main");
   };
   return (
