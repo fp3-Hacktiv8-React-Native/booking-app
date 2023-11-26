@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import { auth } from "../firebase"; // Sesuaikan path ini dengan path ke file konfigurasi Firebase Anda
+import { auth } from "../firebase";
 
 const ProfileScreen = ({ navigation }) => {
   const [user, setUser] = useState(null);
@@ -8,22 +8,18 @@ const ProfileScreen = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        // User is signed in.
         setUser(authUser);
       } else {
-        // User is signed out.
         setUser(null);
       }
     });
 
-    // Cleanup subscription on unmount
     return unsubscribe;
   }, []);
 
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      // Redirect to login screen after successful logout
       navigation.navigate("Login");
     } catch (error) {
       console.error("Error during logout:", error.message);
