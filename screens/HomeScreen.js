@@ -69,7 +69,7 @@ const HomeScreen = () => {
       />
     );
   };
-  console.log(route.params);
+  // console.log(route.params);
 
   const searchPlaces = (place) => {
     if (!route.params || !selectedDates) {
@@ -111,7 +111,8 @@ const HomeScreen = () => {
               borderColor: "#FFC72C",
               borderWidth: 3,
               borderRadius: 6,
-            }}>
+            }}
+          >
             {/* Destination */}
             <Pressable
               onPress={() => navigation.navigate("Search")}
@@ -123,7 +124,8 @@ const HomeScreen = () => {
                 borderColor: "#FFC72C",
                 borderWidth: 2,
                 paddingVertical: 15,
-              }}>
+              }}
+            >
               <Feather name="search" size={24} color="black" />
               <TextInput
                 placeholderTextColor="black"
@@ -143,7 +145,8 @@ const HomeScreen = () => {
                 borderColor: "#FFC72C",
                 borderWidth: 2,
                 paddingVertical: 15,
-              }}>
+              }}
+            >
               <Feather name="calendar" size={24} color="black" />
               <DatePicker
                 style={{
@@ -192,7 +195,8 @@ const HomeScreen = () => {
                 borderColor: "#FFC72C",
                 borderWidth: 2,
                 paddingVertical: 15,
-              }}>
+              }}
+            >
               <Ionicons name="person-outline" size={24} color="black" />
               <TextInput
                 placeholderTextColor="red"
@@ -209,21 +213,24 @@ const HomeScreen = () => {
                 borderWidth: 2,
                 paddingVertical: 15,
                 backgroundColor: "#2a52be",
-              }}>
+              }}
+            >
               <Text
                 style={{
                   textAlign: "center",
                   fontSize: 15,
                   fontWeight: "500",
                   color: "white",
-                }}>
+                }}
+              >
                 Search
               </Text>
             </Pressable>
           </View>
 
           <Text
-            style={{ marginHorizontal: 20, fontSize: 17, fontWeight: "500" }}>
+            style={{ marginHorizontal: 20, fontSize: 17, fontWeight: "500" }}
+          >
             Travel More spend less
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -236,14 +243,16 @@ const HomeScreen = () => {
                 borderRadius: 10,
                 padding: 20,
                 marginHorizontal: 20,
-              }}>
+              }}
+            >
               <Text
                 style={{
                   color: "white",
                   fontSize: 15,
                   fontWeight: "bold",
                   marginVertical: 7,
-                }}>
+                }}
+              >
                 Genius
               </Text>
               <Text style={{ color: "white", fontSize: 15, fontWeight: "500" }}>
@@ -261,13 +270,15 @@ const HomeScreen = () => {
                 borderRadius: 10,
                 padding: 20,
                 marginHorizontal: 10,
-              }}>
+              }}
+            >
               <Text
                 style={{
                   fontSize: 15,
                   fontWeight: "bold",
                   marginVertical: 7,
-                }}>
+                }}
+              >
                 15% Discounts
               </Text>
               <Text style={{ fontSize: 15, fontWeight: "500" }}>
@@ -285,13 +296,15 @@ const HomeScreen = () => {
                 borderRadius: 10,
                 padding: 20,
                 marginHorizontal: 20,
-              }}>
+              }}
+            >
               <Text
                 style={{
                   fontSize: 15,
                   fontWeight: "bold",
                   marginVertical: 7,
-                }}>
+                }}
+              >
                 10% Discounts
               </Text>
               <Text style={{ fontSize: 15, fontWeight: "500" }}>
@@ -305,7 +318,8 @@ const HomeScreen = () => {
               marginTop: 40,
               justifyContent: "center",
               alignItems: "center",
-            }}>
+            }}
+          >
             <Image
               style={{ width: 200, height: 50, resizeMode: "cover" }}
               source={{
@@ -341,7 +355,8 @@ const HomeScreen = () => {
         }
         onHardwareBackPress={() => setModalVisibile(!modalVisibile)}
         visible={modalVisibile}
-        onTouchOutside={() => setModalVisibile(!modalVisibile)}>
+        onTouchOutside={() => setModalVisibile(!modalVisibile)}
+      >
         <ModalContent style={{ width: "100%", height: 310 }}>
           <View
             style={{
@@ -349,10 +364,12 @@ const HomeScreen = () => {
               alignItems: "center",
               justifyContent: "space-between",
               marginVertical: 15,
-            }}>
+            }}
+          >
             <Text style={{ fontSize: 16, fontWeight: "500" }}>Rooms</Text>
             <Pressable
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
               <Pressable
                 onPress={() => setRooms(Math.max(1, rooms - 1))}
                 style={{
@@ -361,14 +378,16 @@ const HomeScreen = () => {
                   borderRadius: 13,
                   borderColor: "#BEBEBE",
                   backgroundColor: "#E0E0E0",
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 20,
                     fontWeight: "600",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   -
                 </Text>
               </Pressable>
@@ -380,7 +399,8 @@ const HomeScreen = () => {
                     fontSize: 18,
                     fontWeight: "500",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   {rooms}
                 </Text>
               </Pressable>
@@ -393,14 +413,16 @@ const HomeScreen = () => {
                   borderRadius: 13,
                   borderColor: "#BEBEBE",
                   backgroundColor: "#E0E0E0",
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 20,
                     fontWeight: "600",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   +
                 </Text>
               </Pressable>
@@ -413,10 +435,12 @@ const HomeScreen = () => {
               alignItems: "center",
               justifyContent: "space-between",
               marginVertical: 15,
-            }}>
+            }}
+          >
             <Text style={{ fontSize: 16, fontWeight: "500" }}>Adults</Text>
             <Pressable
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
               <Pressable
                 onPress={() => setAdults(Math.max(1, adults - 1))}
                 style={{
@@ -425,14 +449,16 @@ const HomeScreen = () => {
                   borderRadius: 13,
                   borderColor: "#BEBEBE",
                   backgroundColor: "#E0E0E0",
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 20,
                     fontWeight: "600",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   -
                 </Text>
               </Pressable>
@@ -444,7 +470,8 @@ const HomeScreen = () => {
                     fontSize: 18,
                     fontWeight: "500",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   {adults}
                 </Text>
               </Pressable>
@@ -457,14 +484,16 @@ const HomeScreen = () => {
                   borderRadius: 13,
                   borderColor: "#BEBEBE",
                   backgroundColor: "#E0E0E0",
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 20,
                     fontWeight: "600",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   +
                 </Text>
               </Pressable>
@@ -477,10 +506,12 @@ const HomeScreen = () => {
               alignItems: "center",
               justifyContent: "space-between",
               marginVertical: 15,
-            }}>
+            }}
+          >
             <Text style={{ fontSize: 16, fontWeight: "500" }}>Children</Text>
             <Pressable
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
               <Pressable
                 onPress={() => setChildren(Math.max(0, children - 1))}
                 style={{
@@ -489,14 +520,16 @@ const HomeScreen = () => {
                   borderRadius: 13,
                   borderColor: "#BEBEBE",
                   backgroundColor: "#E0E0E0",
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 20,
                     fontWeight: "600",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   -
                 </Text>
               </Pressable>
@@ -508,7 +541,8 @@ const HomeScreen = () => {
                     fontSize: 18,
                     fontWeight: "500",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   {children}
                 </Text>
               </Pressable>
@@ -521,14 +555,16 @@ const HomeScreen = () => {
                   borderRadius: 13,
                   borderColor: "#BEBEBE",
                   backgroundColor: "#E0E0E0",
-                }}>
+                }}
+              >
                 <Text
                   style={{
                     textAlign: "center",
                     fontSize: 20,
                     fontWeight: "600",
                     paddingHorizontal: 6,
-                  }}>
+                  }}
+                >
                   +
                 </Text>
               </Pressable>

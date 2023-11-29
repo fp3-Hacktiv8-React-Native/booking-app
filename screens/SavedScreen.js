@@ -1,14 +1,47 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { connect } from "react-redux";
+import React, { useLayoutEffect } from "react";
+import { ScrollView } from "react-native";
+import SavedPropertyCard from "../components/SavedPropertyCard";
+import { useNavigation } from "@react-navigation/native";
 
-const SavedScreen = () => {
+const SavedScreen = ({ savedProperties }) => {
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: true,
+      title: "Saved",
+      headerTitleStyle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: "white",
+      },
+      headerStyle: {
+        backgroundColor: "#003580",
+        height: 110,
+        borderBottomColor: "transparent",
+        shadowColor: "transparent",
+      },
+    });
+  }, []);
+
   return (
-    <View>
-      <Text>SavedScreen</Text>
-    </View>
+    <ScrollView>
+      {savedProperties.map((property, index) => (
+        <SavedPropertyCard
+          key={index}
+          property={property}
+          onRemove={() => handleRemoveSavedProperty(property)}
+        />
+      ))}
+    </ScrollView>
   );
 };
 
-export default SavedScreen;
+const mapStateToProps = (state) => {
+  return {
+    savedProperties: state.booking.list,
+  };
+};
 
-const styles = StyleSheet.create({});
+export default connect(mapStateToProps)(SavedScreen);
